@@ -15,12 +15,11 @@ pipeline {
             }
         }
         stage ('Get Configuration') {
-            node {
-            // def config = readYaml(file: 'config.yml')
-                def configData = readYaml(file: 'config.yml')
             steps {
                 echo 'Configuring...'
-            }
+                script {
+                    def configData = readYaml file: 'config.yml'
+                }
             }
         }
         stage ('Test') {
