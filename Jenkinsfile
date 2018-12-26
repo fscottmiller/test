@@ -10,7 +10,9 @@ pipeline {
     
     stages {
         stage ('Checkout SCM') {
-            checkout scm
+            steps {
+                checkout scm
+            }
         }
         stage ('Get Configuration') {
             steps {
