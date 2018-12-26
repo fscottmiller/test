@@ -15,7 +15,7 @@ pipeline {
             }
         }
         stage ('Get Configuration') {
-            config = sh(readYaml(file: 'config.yml'))
+            def config = readYaml(file: 'config.yml')
             steps {
                 echo 'Configuring...'
             }
