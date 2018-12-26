@@ -1,20 +1,37 @@
 pipeline {
-    agent any
+    agent { node { label 'master' } }
+    
+    parameters {
+        string(name: 'project_name', description: '', defaultValue: '')
+		string(name: 'project_repo', description: '', defaultValue: '')
+		string(name: 'project_branch', description: '', defaultValue: 'master')
+		string(name: 'project_env', description: '', defaultValue: '')
+    }
+    
     stages {
-        stage('Build') {
+        stage ('Checkout SCM') {
+            checkout scm
+        }
+        stage ('Get Configuration') {
             steps {
-                echo 'Building..'
+                echo 'Configuring...'
+                env.config = readYaml(file: 'config.yml')
             }
         }
-        stage('Test') {
+        stage ('Test') {
             steps {
-                echo 'Testing..'
+                echo 'Testing...'
             }
         }
-        stage('Deploy') {
+        stage ('Deploy') {
             steps {
-                echo 'Deploying....'
+                echo 'Deploying...'
             }
+        }
+    }
+    post {
+        always {
+            echo 'Sending emails...'
         }
     }
 }
