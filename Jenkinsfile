@@ -18,13 +18,13 @@ pipeline {
             steps {
                 echo 'Configuring...'
                 script {
-                    def configData = readYaml file: 'config.yml'
+                    env.configData = readYaml file: 'config.yml'
                 }
             }
         }
         stage ('Prepare Environment') {
             steps {
-                echo "${configData}"
+                echo "${env.configData}"
             }
         }
         stage ('Test') {
