@@ -24,7 +24,7 @@ pipeline {
         }
         stage ('Prepare Environment') {
             steps {
-                echo ${configData}
+                echo "${configData}"
             }
         }
         stage ('Test') {
