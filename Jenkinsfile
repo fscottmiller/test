@@ -22,6 +22,11 @@ pipeline {
                 }
             }
         }
+        stage ('Prepare Environment') {
+            steps {
+                echo ${configData}
+            }
+        }
         stage ('Test') {
             steps {
                 echo 'Testing...'
