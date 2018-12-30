@@ -1,7 +1,7 @@
 @Library('lib')_
 
 pipeline {
-    agent { node { label 'master' } }z
+    agent { node { label 'master' } }
     
     //parameters {
      //   string(name: 'project_name', description: '', defaultValue: '')
