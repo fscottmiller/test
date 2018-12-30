@@ -5,7 +5,7 @@ pipeline {
     
     parameters {
         string(name: 'Repository', defaultValue: '', description: 'The repo containing the testing code you want to run')
-        String(name: 'Branch', defaultValue: 'master', description: 'The branch of your repo in which you are interested') 
+        string(name: 'Branch', defaultValue: 'master', description: 'The branch of your repo in which you are interested') 
     }
     
     stages {
