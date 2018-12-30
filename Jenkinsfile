@@ -9,19 +9,15 @@ pipeline {
     }
     
     stages {
-        stage ('Clone Repository') {
-            steps {
-                gitClone(params.Repository, params.Branch)
-            }
-        }
         stage ('Prepare Environment') {
             steps {
+                gitClone(params.Repository, params.Branch)
                 prepareEnvironment()
             }
         }
         stage ('Test') {
             steps {
-                executeTests()
+                executeTests("@web")
             }
         }
     }
