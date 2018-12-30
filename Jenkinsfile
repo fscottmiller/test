@@ -3,13 +3,6 @@
 pipeline {
     agent { node { label 'master' } }
     
-    //parameters {
-     //   string(name: 'project_name', description: '', defaultValue: '')
-	//	string(name: 'project_repo', description: '', defaultValue: '')
-	//	string(name: 'project_branch', description: '', defaultValue: 'master')
-	//	string(name: 'project_env', description: '', defaultValue: '')
-    //}
-    
     stages {
         stage ('Checkout SCM') {
             steps {
@@ -17,10 +10,14 @@ pipeline {
             }
         }
         stage ('Prepare Environment') {
-            prepareEnvironment()
+            steps {
+                prepareEnvironment()
+            }
         }
         stage ('Test') {
-            executeTests()
+            steps {
+                executeTests()
+            }
         }
     }
     post {
