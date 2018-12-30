@@ -10,7 +10,9 @@ pipeline {
     
     stages {
         stage ('Clone Repository') {
-            gitClone(params.Repository, params.Branch)
+            steps {
+                gitClone(params.Repository, params.Branch)
+            }
         }
         stage ('Prepare Environment') {
             steps {
