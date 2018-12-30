@@ -8,11 +8,6 @@ pipeline {
     }
     
     stages {
-        stage ('Clean') {
-            steps {
-                cleanWs()
-            }
-        }
         stage ('Checkout SCM') {
             steps {
                 bat "git clone ${params.Repository}"
