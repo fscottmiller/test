@@ -5,13 +5,12 @@ pipeline {
     
     parameters {
         string(name: 'Repository', defaultValue: '', description: 'The repo containing the testing code you want to run')
+        String(name: 'Branch', defaultValue: 'master', description: 'The branch of your repo in which you are interested') 
     }
     
     stages {
-        stage ('Checkout SCM') {
-            steps {
-                bat "git clone ${params.Repository}"
-                }
+        stage ('Clone Repository') {
+            gitClone(params.Repository, params.Branch)
         }
         stage ('Prepare Environment') {
             steps {
@@ -20,8 +19,7 @@ pipeline {
         }
         stage ('Test') {
             steps {
-                bat 'cd automation && cucumber --tags @api'
-                //executeTests()
+                executeTests()
             }
         }
     }
