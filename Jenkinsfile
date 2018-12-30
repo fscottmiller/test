@@ -11,6 +11,9 @@ pipeline {
         stage ('Checkout SCM') {
             steps {
                 bat 'git clone https://github.com/QATInc/automation'
+                bat 'dir'
+                bat 'cd automation'
+                bat 'dir'
             }
         }
         stage ('Prepare Environment') {
