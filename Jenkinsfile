@@ -8,6 +8,11 @@ pipeline {
     }
     
     stages {
+        stage ('Clean') {
+            steps {
+                cleanWs()
+            }
+        }
         stage ('Checkout SCM') {
             steps {
                 bat 'git clone https://github.com/QATInc/automation'
