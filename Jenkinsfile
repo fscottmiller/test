@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage ('Checkout SCM') {
             steps {
-                sh(git clone https://github.com/QATInc/automation)
+                sh 'git clone https://github.com/QATInc/automation'
             }
         }
         stage ('Prepare Environment') {
