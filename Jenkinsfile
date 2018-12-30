@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage ('Prepare Environment') {
             steps {
-                bat "ruby -v"
+                bat "env"
                 gitClone(params.Repository, params.Branch)
                 prepareEnvironment()
             }
