@@ -17,8 +17,7 @@ pipeline {
             steps {
                 bat 'git clone https://github.com/QATInc/automation'
                 bat 'dir'
-                bat 'cd automation'
-                bat 'dir'
+                bat 'cd automation && dir'
             }
         }
         stage ('Prepare Environment') {
