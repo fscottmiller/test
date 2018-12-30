@@ -15,7 +15,7 @@ pipeline {
         }
         stage ('Checkout SCM') {
             steps {
-                bat 'git clone ${params.Repository}'
+                bat "git clone ${params.Repository}"
                 }
         }
         stage ('Prepare Environment') {
