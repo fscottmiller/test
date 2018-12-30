@@ -19,17 +19,20 @@ pipeline {
                 echo 'Configuring...'
                 script {
                     env.configData = readYaml file: 'config.yml'
+                    env. controller = load('pipeline.groovy')
                 }
             }
         }
         stage ('Prepare Environment') {
             steps {
-                echo "${env.configData}"
+                echo "Preparing Environment.."
+                env.controller.prepareEnvironment(project_name, project_repo, project_branch, project_env)
             }
         }
         stage ('Test') {
             steps {
                 echo 'Testing...'
+                env.controller.executeTests(project_name, project_repo, project_branch, project_env)
             }
         }
         stage ('Deploy') {
@@ -41,6 +44,7 @@ pipeline {
     post {
         always {
             echo 'Sending emails...'
+            env.controller.sendNotifications(project_name, project_repo, project_branch, project_env)
         }
     }
 }
