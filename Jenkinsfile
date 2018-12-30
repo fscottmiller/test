@@ -20,7 +20,8 @@ pipeline {
         }
         stage ('Test') {
             steps {
-                executeTests()
+                bat 'cd automation && cucumber --tags @api'
+                //executeTests()
             }
         }
     }
