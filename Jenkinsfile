@@ -15,10 +15,8 @@ pipeline {
         }
         stage ('Checkout SCM') {
             steps {
-                bat 'git clone https://github.com/QATInc/automation'
-                bat 'dir'
-                bat 'cd automation && dir'
-            }
+                bat 'git clone ${params.Repository}'
+                }
         }
         stage ('Prepare Environment') {
             steps {
@@ -34,6 +32,7 @@ pipeline {
     post {
         always {
             echo 'Sending emails...'
+            cleanWs()
         }
     }
 }
