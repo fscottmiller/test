@@ -11,7 +11,6 @@ pipeline {
     stages {
         stage ('Prepare Environment') {
             steps {
-                bat "env"
                 gitClone(params.Repository, params.Branch)
                 bat "dir"
                 prepareEnvironment()
