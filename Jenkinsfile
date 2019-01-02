@@ -13,6 +13,7 @@ pipeline {
             steps {
                 gitClone(params.Repository, params.Branch)
                 env.config = readYaml(file: 'config.yml')
+                bat "echo ${env.config['language']}}"
                 prepareEnvironment()
             }
         }
