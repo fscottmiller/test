@@ -16,9 +16,8 @@ pipeline {
     stages {
         stage ('Configure') {
             steps {
-                echo env.config
                 script {
-                    env.language = 'ruby'
+                    env.language = readYaml(text: env.config)['language']   
                 }
             }
         }
