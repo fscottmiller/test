@@ -7,12 +7,13 @@ pipeline {
         string(name: 'Repository', defaultValue: '', description: 'The repo containing the testing code you want to run')
         string(name: 'Branch', defaultValue: 'master', description: 'The branch of your repo in which you are interested') 
     }
-    
+      
     stages {
         stage ('Prepare Environment') {
             steps {
                 bat "env"
                 gitClone(params.Repository, params.Branch)
+                bat "dir"
                 prepareEnvironment()
             }
         }
