@@ -15,11 +15,13 @@ pipeline {
       
     stages {
         stage ('Configure') {
-            //config = readYaml(file: 'config.yml')
-            //env.language = config['language']
-            //env.os = config['operating system']
-            script {
-                env.language = 'ruby'
+            steps {
+                //config = readYaml(file: 'config.yml')
+                //env.language = config['language']
+                //env.os = config['operating system']
+                script {
+                    env.language = 'ruby'
+                }
             }
         }
         stage ('Prepare Environment') {
