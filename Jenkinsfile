@@ -9,16 +9,23 @@ pipeline {
         string(name: 'Environment', defaultValue: 'dev', description: 'The environment you are interested in')
     }
       
+    environment {
+        def config = readYaml(file: 'config.yml')
+    }
+      
     stages {
+        stage ('Configure') {
+            //config = readYaml(file: 'config.yml')
+            //env.language = config['language']
+            //env.os = config['operating system']
+            script {
+                env.language = 'ruby'
+            }
+        }
         stage ('Prepare Environment') {
             steps {
-                bat 'dir'
                 gitClone(params.Repository, params.Branch)
                 script {
-                    config = readYaml(file: 'config.yml')
-                    env.language = config['language']
-                    env.os = config['operating system']
-                // prepareEnvironment(env.language)
                 switch(env.language) {
                     case 'ruby':
                         echo 'Provisioning ruby env...'
@@ -43,6 +50,7 @@ pipeline {
             }
         }
     }
+
     post {
         always {
             echo 'Sending emails...'
