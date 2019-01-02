@@ -8,13 +8,7 @@ pipeline {
         string(name: 'Branch', defaultValue: 'master', description: 'The branch of your repo in which you are interested')
         string(name: 'Environment', defaultValue: 'dev', description: 'The environment you are interested in')
     }
-      
-    // environment {
-        // def conf = readYaml(file: 'config.yml')
-        // def language = "${env.conf['language']}"
-        // def fnTags = "api"
-    // }
-      
+
     stages {
         stage ('Prepare Environment') {
             steps {
