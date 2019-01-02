@@ -12,7 +12,7 @@ pipeline {
         stage ('Prepare Environment') {
             steps {
                 gitClone(params.Repository, params.Branch)
-                bat "dir"
+                env.config = readYaml(file: 'config.yml')
                 prepareEnvironment()
             }
         }
