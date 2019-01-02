@@ -18,26 +18,26 @@ pipeline {
     stages {
         stage ('Prepare Environment') {
             steps {
-                def conf = readYaml(file: 'config.yml')
-                env.language = conf['language']
-                env.tags = conf['tags']
                 gitClone(params.Repository, params.Branch)
                 script {
-                switch(env.language) {
-                    case 'ruby':
-                        echo 'Provisioning ruby env...'
-                        // prepareRubyEnv()
-                        break
-                    case 'junit':
-                        echo 'Provisioning java env...'
-                        break
-                    case 'specflow':
-                        echo 'Provisioning c# env...'
-                        break
-                    default:
-                        error('Project language from config.yml is not yet supported')
-                        break
-                }
+                    def conf = readYaml(file: 'config.yml')
+                    env.language = conf['language']
+                    env.tags = conf['tags']
+                    switch(env.language) {
+                        case 'ruby':
+                            echo 'Provisioning ruby env...'
+                            // prepareRubyEnv()
+                            break
+                        case 'junit':
+                            echo 'Provisioning java env...'
+                            break
+                        case 'specflow':
+                            echo 'Provisioning c# env...'
+                            break
+                        default:
+                            error('Project language from config.yml is not yet supported')
+                            break
+                    }
                 }
             }
         }
