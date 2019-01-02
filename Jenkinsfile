@@ -5,7 +5,8 @@ pipeline {
     
     parameters {
         string(name: 'Repository', defaultValue: '', description: 'The repo containing the testing code you want to run')
-        string(name: 'Branch', defaultValue: 'master', description: 'The branch of your repo in which you are interested') 
+        string(name: 'Branch', defaultValue: 'master', description: 'The branch of your repo in which you are interested')
+        string(name: 'Environment', defaultValue: 'dev', description: 'The environment you're interested in')
     }
       
     stages {
@@ -17,7 +18,6 @@ pipeline {
                     env.language = config['language']
                     env.os = config['operating system']
                 }
-                echo env.language
                 prepareEnvironment(env.language)
             }
         }
