@@ -13,10 +13,11 @@ pipeline {
             steps {
                 gitClone(params.Repository, params.Branch)
                 script {
-                    env.configData = readYaml(file: 'config.yml')
-                    //echo "${configData['language']}"
+                    config = readYaml(file: 'config.yml')
+                    env.language = config['language']
+                    env.os = config['operating system']
                 }
-                echo env.configData
+                echo env.language
                 prepareEnvironment()
             }
         }
