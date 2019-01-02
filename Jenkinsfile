@@ -12,7 +12,9 @@ pipeline {
         stage ('Prepare Environment') {
             steps {
                 gitClone(params.Repository, params.Branch)
-                def configData = readYaml(file: 'config.yml')
+                script {
+                    def configData = readYaml(file: 'config.yml')
+                }
                 bat "echo ${configData['language']}}"
                 prepareEnvironment()
             }
