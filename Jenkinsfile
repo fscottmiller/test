@@ -10,7 +10,8 @@ pipeline {
     }
       
     environment {
-        def language = readYaml(file: 'config.yml')['language']
+        def conf = readYaml(file: 'config.yml')
+        def language = env.conf['language']
     }
       
     stages {
