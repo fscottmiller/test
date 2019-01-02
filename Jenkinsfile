@@ -12,6 +12,9 @@ pipeline {
     environment {
         def conf = readYaml(file: 'config.yml')
         def language = "${env.conf['language']}"
+        
+        // hard coded - change to read from yaml
+        def fnTags = ["api", "ui"]
     }
       
     stages {
@@ -48,7 +51,8 @@ pipeline {
         }
         stage ('Test') {
             steps {
-                echo "run tests here"
+                echo "run tests"
+                executeTests(env.language, env.fnTags, paras.Environment)
             }
         }
     }
