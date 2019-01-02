@@ -16,7 +16,7 @@ pipeline {
                     env.configData = readYaml(file: 'config.yml')
                     //echo "${configData['language']}"
                 }
-                echo env.configData['language']
+                echo env.configData
                 prepareEnvironment()
             }
         }
