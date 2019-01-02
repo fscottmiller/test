@@ -52,7 +52,7 @@ pipeline {
                 echo "run tests"
                 
                 // hard coded tags for now
-                executeTests(env.language, ["api", "ui"], params.Environment)
+                executeTests(env.language, "api", params.Environment)
             }
         }
     }
