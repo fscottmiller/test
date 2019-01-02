@@ -23,6 +23,8 @@ pipeline {
                     def conf = readYaml(file: 'config.yml')
                     env.language = conf['language']
                     env.tags = conf['tags']
+                    echo "printing env.tags..."
+                    echo env.tags
                     switch(env.language) {
                         case 'ruby':
                             echo 'Provisioning ruby env...'
@@ -46,7 +48,7 @@ pipeline {
                 echo "run tests"
                 
                 // hard coded tags for now
-                executeTests(env.language, env.fnTags, params.Environment)
+                executeTests(env.language, env.tags, params.Environment)
             }
         }
     }
