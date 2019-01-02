@@ -14,8 +14,9 @@ pipeline {
                 gitClone(params.Repository, params.Branch)
                 script {
                     def configData = readYaml(file: 'config.yml')
+                    echo "${configData['language']}"
                 }
-                bat "echo ${configData['language']}}"
+                //bat "echo ${configData['language']}}"
                 prepareEnvironment()
             }
         }
