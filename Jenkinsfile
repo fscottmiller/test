@@ -18,12 +18,12 @@ pipeline {
                     env.os = config['operating system']
                 }
                 echo env.language
-                prepareEnvironment()
+                prepareEnvironment(env.language)
             }
         }
         stage ('Test') {
             steps {
-                executeTests("@web")
+                
             }
         }
     }
