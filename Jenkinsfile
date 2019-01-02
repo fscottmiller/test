@@ -11,7 +11,7 @@ pipeline {
       
     environment {
         def conf = readYaml(file: 'config.yml')
-        def language = "" + "${env.conf['language']}"
+        def language = "${env.conf['language']}"
     }
       
     stages {
@@ -19,6 +19,7 @@ pipeline {
             steps {
                 script {
                     //env.language = readYaml(text: env.config)['language']   
+                    echo env.language
                     echo 'configured'
                 }
             }
