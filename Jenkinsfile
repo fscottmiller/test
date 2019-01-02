@@ -18,7 +18,6 @@ pipeline {
                     config = readYaml(file: 'config.yml')
                     env.language = config['language']
                     env.os = config['operating system']
-                }
                 // prepareEnvironment(env.language)
                 switch(env.language) {
                     case 'ruby':
@@ -34,6 +33,7 @@ pipeline {
                     default:
                         error('Project language from config.yml is not yet supported')
                         break
+                }
                 }
             }
         }
