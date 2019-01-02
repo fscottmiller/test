@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage ('Configure') {
             steps {
-                echo env.config
+                echo "#{env.config['language']}"
                 script {
                     env.language = 'ruby'
                 }
