@@ -9,24 +9,18 @@ pipeline {
         string(name: 'Environment', defaultValue: 'dev', description: 'The environment you are interested in')
     }
       
-    environment {
-        def conf = readYaml(file: 'config.yml')
-        def language = "${env.conf['language']}"
-        def fnTags = "api"
-    }
+    // environment {
+        // def conf = readYaml(file: 'config.yml')
+        // def language = "${env.conf['language']}"
+        // def fnTags = "api"
+    // }
       
     stages {
-        stage ('Configure') {
-            steps {
-                script {
-                    //env.language = readYaml(text: env.config)['language']   
-                    echo env.language
-                    echo 'configured'
-                }
-            }
-        }
         stage ('Prepare Environment') {
             steps {
+                def conf = readYaml(file: 'config.yml')
+                env.language = conf['language']
+                env.tags = conf['tags']
                 gitClone(params.Repository, params.Branch)
                 script {
                 switch(env.language) {
