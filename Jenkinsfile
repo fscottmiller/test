@@ -41,9 +41,7 @@ pipeline {
             steps {
                 echo "run tests"
                 
-                //executeTests(env.language, env.tags, params.Environment)
-                bat "cucumber --tags @web"
-                
+                executeTests(env.language, env.tags, params.Environment)                
             }
         }
     }
