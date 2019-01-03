@@ -4,7 +4,7 @@ pipeline {
     agent { node { label 'master' } }
     
     parameters {
-        string(name: 'Repository', defaultValue: 'http://github.com/fscottmiller/test_suite', description: 'The repo containing the testing code you want to run')
+        string(name: 'Repository', defaultValue: 'http://github.com/qatinc/automation', description: 'The repo containing the testing code you want to run')
         string(name: 'Branch', defaultValue: 'master', description: 'The branch of your repo in which you are interested')
         string(name: 'Environment', defaultValue: 'dev', description: 'The environment you are interested in')
     }
@@ -42,9 +42,8 @@ pipeline {
                 echo "run tests"
                 
                 //executeTests(env.language, env.tags, params.Environment)
-                script {
-                    cucumber --tags @web
-                }
+                bat "cucumber --tags @web"
+                
             }
         }
     }
