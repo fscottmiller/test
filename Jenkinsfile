@@ -12,7 +12,6 @@ pipeline {
     stages {
         stage ('Prepare Environment') {
             steps {
-                bat "set"
                 gitClone(params.Repository, params.Branch)
                 script {
                     def conf = readYaml(file: 'config.yml')
@@ -42,8 +41,10 @@ pipeline {
             steps {
                 echo "run tests"
                 
-                // hard coded tags for now
-                executeTests(env.language, env.tags, params.Environment)
+                //executeTests(env.language, env.tags, params.Environment)
+                script {
+                    cucumber --tags @web
+                }
             }
         }
     }
