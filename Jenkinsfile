@@ -12,9 +12,9 @@ pipeline {
     stages {
         stage ('Prepare Environment') {
             steps {
+                bat("set")
                 gitClone(params.Repository, params.Branch)
                 script {
-                    bat("set")
                     def conf = readYaml(file: 'config.yml')
                     env.language = conf['language']
                     env.tags = conf['tags']
