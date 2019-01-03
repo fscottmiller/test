@@ -14,6 +14,7 @@ pipeline {
             steps {
                 gitClone(params.Repository, params.Branch)
                 script {
+                    readConfig()
                     def conf = readYaml(file: 'config.yml')
                     env.language = conf['language']
                     env.tags = conf['tags']
