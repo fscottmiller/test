@@ -23,7 +23,7 @@ pipeline {
                     switch(env.language) {
                         case 'ruby':
                             echo 'Provisioning ruby env...'
-                            // prepareRubyEnv()
+                            prepareRubyEnv()
                             break
                         case 'junit':
                             echo 'Provisioning java env...'
