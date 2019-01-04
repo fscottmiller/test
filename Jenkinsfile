@@ -14,7 +14,7 @@ pipeline {
             steps {
                 gitClone(params.Repository, params.Branch)
                 script {
-                    def conf = readYaml(file: 'config.yml')
+                    def conf = readYaml(file: 'jenkins-config.yml')
                     env.language = conf['language']
                     env.tags = conf['tags']
                     echo "printing env.tags..."
@@ -31,7 +31,7 @@ pipeline {
                             echo 'Provisioning c# env...'
                             break
                         default:
-                            error('Project language from config.yml is not yet supported')
+                            error('Project language from jenkins-config.yml is not yet supported')
                             break
                     }
                 }
