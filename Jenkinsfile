@@ -4,7 +4,7 @@ pipeline {
     agent { node { label 'master' } }
     
     parameters {
-        string(name: 'Repository', defaultValue: 'http://github.com/qatinc/automation', description: 'The repo containing the testing code you want to run')
+        string(name: 'Repository', defaultValue: 'http://github.com/fscottmiller/test-suite', description: 'The repo containing the testing code you want to run')
         string(name: 'Branch', defaultValue: 'master', description: 'The branch of your repo in which you are interested')
         string(name: 'Environment', defaultValue: 'dev', description: 'The environment you are interested in')
     }
@@ -14,6 +14,7 @@ pipeline {
             steps {
                 gitClone(params.Repository, params.Branch)
                 script {
+                    readConfig()
                     def conf = readYaml(file: 'jenkins-config.yml')
                     env.language = conf['language']
                     env.tags = conf['tags']
@@ -22,7 +23,7 @@ pipeline {
                     switch(env.language) {
                         case 'ruby':
                             echo 'Provisioning ruby env...'
-                            // prepareRubyEnv()
+                            prepareSlaves()
                             break
                         case 'junit':
                             echo 'Provisioning java env...'
