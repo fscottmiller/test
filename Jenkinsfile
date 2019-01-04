@@ -12,38 +12,14 @@ pipeline {
     stages {
         stage ('Prepare Environment') {
             steps {
-                gitClone(params.Repository, params.Branch)
-                script {
-                    bat("set")
-                    def conf = readYaml(file: 'config.yml')
-                    env.language = conf['language']
-                    env.tags = conf['tags']
-                    echo "printing env.tags..."
-                    echo env.tags
-                    switch(env.language) {
-                        case 'ruby':
-                            echo 'Provisioning ruby env...'
-                            // prepareRubyEnv()
-                            break
-                        case 'junit':
-                            echo 'Provisioning java env...'
-                            break
-                        case 'specflow':
-                            echo 'Provisioning c# env...'
-                            break
-                        default:
-                            error('Project language from config.yml is not yet supported')
-                            break
-                    }
-                }
+				prepareMaster(params.Repository, params.Branch)
+				prepareSlaves(params.Repository, params.Branch)
             }
         }
-        stage ('Test') {
+        stage ('Execute Tests') {
             steps {
                 echo "run tests"
-                
-                // hard coded tags for now
-                executeTests(env.language, env.tags, params.Environment)
+                executeTests(params.Environment)
             }
         }
     }
@@ -51,6 +27,8 @@ pipeline {
     post {
         always {
             echo 'Sending emails...'
+			sendEmails()
+			exportReports()
             cleanWs()
         }
     }
