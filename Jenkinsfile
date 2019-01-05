@@ -8,18 +8,22 @@ pipeline {
         string(name: 'Branch', defaultValue: 'master', description: 'The branch of your repo in which you are interested')
         string(name: 'Environment', defaultValue: 'dev', description: 'The environment you are interested in')
     }
+	
+	environment {
+		ConfigurationFile = "jenkins-config.yml"
+	}
 
     stages {
         stage ('Prepare Environment') {
             steps {
-				prepareMaster(params.Repository, params.Branch)
-				prepareSlaves(params.Repository, params.Branch)
+				prepareMaster(Repository, Branch, ConfigurationFile)
+				prepareSlaves(Repository, Branch)
             }
         }
         stage ('Execute Tests') {
             steps {
                 echo "run tests"
-                executeTests(params.Environment)
+                executeTests(Environment)
             }
         }
     }
